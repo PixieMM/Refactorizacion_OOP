@@ -115,11 +115,24 @@ def main():
     punto_objetivo = pedir_coordenadas(mapa, "Ingrese el punto objetivo")
 
     while True:
+
+        print("\nMapa actual:")
+        mapa.visualizar_mapa(punto_inicio=punto_inicio, punto_objetivo=punto_objetivo)
+
         opcion = input("¿Desea agregar un obstáculo? (s/n): ").lower()
         if opcion != 's':
-            break
-        fila, columna = pedir_coordenadas(mapa, "Ingrese la posición del obstáculo")
-        mapa.agregar_obstaculo(fila, columna)
+            eliminar = input('Desea eliminar un obstaculo?').lower()
+            if eliminar == 's':
+                eliminar_fila = input('Ingrese la fila del obstaculo; ')
+                eliminar_columna = input('Ingrese la columna del obstaculo; ')
+                mapa.eliminar_obstaculo(eliminar_fila, eliminar_columna)
+            else:
+                break
+        else:
+            fila, columna = pedir_coordenadas(mapa, "Ingrese la posición del obstáculo")
+            mapa.agregar_obstaculo(fila, columna)
+            print("\nMapa generado con obstáculos:")
+            mapa.visualizar_mapa(punto_inicio=punto_inicio, punto_objetivo=punto_objetivo)
 
     print("\nMapa generado con obstáculos:")
     mapa.visualizar_mapa(punto_inicio=punto_inicio, punto_objetivo=punto_objetivo)
